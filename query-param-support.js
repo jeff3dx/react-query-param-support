@@ -24,7 +24,7 @@ export function queryParamSupport(target) {
      * Any query param set to "true" or "false" will be converted to a boolean type.
      * @param value - the query param string value
      */
-    boolify = (value) => {
+    boolify(value) {
       if (typeof value === 'string') {
         const value2 = value.toLowerCase().trim();
         if (value2 === 'true') {
@@ -69,7 +69,7 @@ export function queryParamSupport(target) {
      * @param name - The query param name
      * @param props - Optional. An alternate props object to use instead of the current props
      */
-    getQueryParam = (name, props) => {
+    getQueryParam(name, props) {
       props = props || this.props;
       const defaults = this.defaultQueryParams || {};
       // If query param is not defined on the query get it's default
@@ -83,7 +83,7 @@ export function queryParamSupport(target) {
      * @param params - Object of name:values to overlay on current query param values.
      * @param addHistory - true = add browser history, default false.
      */
-    setQueryParams = (params, addHistory) => {
+    setQueryParams(params, addHistory) {
       const nextQueryParams = { ...this.props.location.query, ...params };
       const defaults = this.defaultQueryParams || {};
 
