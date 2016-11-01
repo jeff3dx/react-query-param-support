@@ -1,5 +1,5 @@
 ##QueryParamSupport
-Decorator that adds query param support to a route handler React class. 
+Decorator that adds query param support to a route handler React class.
 
 A route handler is a class referenced directly by a route
 in your Router, and therefore receives props.location.query.
@@ -8,19 +8,19 @@ in your Router, and therefore receives props.location.query.
 0. Install npm module
 
 	```js
-	npm install xxxx --save
+	npm install https://github.com/jeff3dx/query-param-support.git --save
 	```
 
 1. Import and add the decorator:
 
 	```js
 	import {queryParamSupport } from 'query-param-support';
-	
+
 	@queryParamSupport
 	export default class MyClass extends Component {
 	}
 ```
-     
+
 2. Optionally define defaultQueryParams on the parent class:
 
 	```js
