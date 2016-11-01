@@ -1,0 +1,16 @@
+{
+  "name": "query-param-support",
+  "description": "Decorator that adds query param support to a React route handler class",
+  "version": "1.0.0",
+  "author": {
+    "name": "Jeff Butsch",
+    "email": "jbutsch@netflix.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "lodash": "^4.16.6"
+  }
+}
