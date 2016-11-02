@@ -1,5 +1,5 @@
 #React Query Param Support
-JavaScript [decorator](http://https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.e3bcycini) that adds query param support to a route handler React class.
+JavaScript [decorator](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.e3bcycini) that adds query param support to a route handler React class.
 
 **Support:** jbutsch@netflix.com
 ####Requirements
