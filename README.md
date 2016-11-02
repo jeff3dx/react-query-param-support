@@ -2,49 +2,45 @@
 Decorator that adds query param support to a route handler React class.
 
 ####Requirements
-This decorator requires a React Webpack project with Babel and React Router, and a class that is a route handler.
+This decorator is designed to work with route handler classes referenced by React Router.
+
 (A route handler is a class referenced directly by a route
 define in your Router, and therefore receives props.location.query.)
 
 ###Installation and usage
-0. Install npm module:
+**1. Install npm module**
 
-	```js
-	npm install https://github.com/jeff3dx/query-param-support.git --save
-	```
+Your project should use the Netflix npm registry. To do so the root of your project should have file **.npmrc** with the following line
 
-1. Import and add the decorator in your class:
+	registry = http://artifacts.netflix.com/api/npm/npm-netflix
+Then run the install command
 
-	```js
-	import {queryParamSupport } from 'query-param-support';
+	npm install react-query-param-support.git --save
 
+**2. Import and add the decorator in your class**
+	
+	import { queryParamSupport } from 'react-query-param-support';
+	
 	@queryParamSupport
 	export default class MyClass extends Component {
 	}
-```
 
-2. Optionally define defaultQueryParams on the parent class:
-
-	```js
+**3. Optionally define defaultQueryParams on the parent class**
+	
 	@queryParamSupport
 	export default class MyClass extends Component {
 	    defaultQueryParams = {
 	        myparam: 'bacon'
 	    }
 	}
-```
 
-3. Get a query param value:
-
-	```js
+**4. Get a query param value**
+	
 	const value = this.queryParams.myparam;
-	```
 
-4. Set a query param value:
-
-	```js
+**5. Set a query param value**
+	
 	this.setQueryParams({ myparam: 'nutella' });
-	```
 
 ### Also
 - Set many query param values at once, like setState().

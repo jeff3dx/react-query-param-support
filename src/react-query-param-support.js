@@ -40,13 +40,13 @@ export function queryParamSupport(target) {
      * Current calculated query params. Updates upon componentWillUpdate() or setQueryParams.
      * Optimizes the case where this.queryParams is referenced multiple times before the next render cycle.
      */
-    _queryParamsCache = null;
+    _queryParamsCache;
 
     /**
      * Getter returns all query params in one object with defaults resolved.
      */
     get queryParams() {
-      if (this._queryParamsCache === null) {
+      if (this._queryParamsCache === null || typeof this._queryParamsCache === 'undefined') {
         if (!this.props.location || !this.props.location.query) {
           throw new Error('Missing props.location.query. queryParamSupport decorator probably applied to a class that is not a route handler.');
         }
