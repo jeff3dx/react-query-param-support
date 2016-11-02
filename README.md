@@ -10,7 +10,7 @@ define in your Router, and therefore receives props.location.query.)
 
 ##Installation
 ####Netflix corporate users
-Your project should use the Netflix npm registry (only available t0 Netflix corporate users). To do so the root of your project should have file **.npmrc** with the following line
+Your project should use the Netflix npm registry (only available to Netflix corporate users). To do so the root of your project should have file **.npmrc** with the following line
 
 	registry = http://artifacts.netflix.com/api/npm/npm-netflix
 Then run the install command
