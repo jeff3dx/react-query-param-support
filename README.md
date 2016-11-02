@@ -18,7 +18,7 @@ Then run the install command
 	npm install react-query-param-support --save
 
 ####Other users
-Run the install command
+Then run the install command
 
 	npm install https://github.com/jeff3dx/query-param-support.git --save
 
