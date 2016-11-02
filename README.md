@@ -6,7 +6,7 @@ JavaScript [decorator](https://medium.com/google-developers/exploring-es7-decora
 Designed to work with **route handler** classes referenced by **React Router**.
 
 (A route handler is a class referenced directly by a route
-define in your Router, and therefore receives props.location.query.)
+defined in your Router, and therefore receives props.location.query.)
 
 ##Installation
 ####Netflix corporate users
@@ -15,7 +15,7 @@ Your project should use the Netflix npm registry (only available to Netflix corp
 	registry = http://artifacts.netflix.com/api/npm/npm-netflix
 Then run the install command
 
-	npm install react-query-param-support.git --save
+	npm install react-query-param-support --save
 
 ####Other users
 Run the install command
