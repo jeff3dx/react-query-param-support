@@ -1,15 +1,16 @@
-import _ from 'lodash';
+import 'string.prototype.startswith';
+import 'string.prototype.endswith';
 
 /**
- * QueryParamSupport
- * Support: jbutsch@netflix.com
+ * React Query Param Support
+ * Support: https://github.com/jeff3dx/query-param-support
  *
  * Decorator that adds query param support to a route handler React class.
  * See readme.md for more details.
  */
 export function queryParamSupport(target) {
-  return class QueryParamComponent extends target {
 
+  return class QueryParamComponent extends target {
     /* Clear the query param cache */
     componentWillUpdate() {
       this._queryParamsCache = null;
@@ -22,9 +23,9 @@ export function queryParamSupport(target) {
     /**
      * Convert boolean string to boolean type.
      * Any query param set to "true" or "false" will be converted to a boolean type.
-     * @param value - the query param string value
+     * @param {string} value - the query param string value
      */
-    boolify(value) {
+    _boolify(value) {
       if (typeof value === 'string') {
         const value2 = value.toLowerCase().trim();
         if (value2 === 'true') {
@@ -35,6 +36,23 @@ export function queryParamSupport(target) {
       }
       return value;
     };
+
+    /**
+     * Convert array string to array
+     */
+    _queryParamToArray(value) {
+      let result = value;
+      if (typeof value === 'string' && !Array.isArray(value) && value.startsWith('[') && value.endsWith(']')) {
+        try {
+          result = JSON.parse(value);
+        } catch(ex) {
+          console.error(ex);
+          // Can't parse so fall back to verbatim value
+          result = value;
+        }
+      }
+      return result;
+    }
 
     /**
      * Current calculated query params. Updates upon componentWillUpdate() or setQueryParams.
@@ -53,11 +71,8 @@ export function queryParamSupport(target) {
         const defaults = this.defaultQueryParams || {};
         const all = { ...defaults, ...this.props.location.query };
         Object.keys(all).forEach(key => {
-          all[key] = this.boolify(all[key]);
-          if (!Array.isArray(all[key]) && _.startsWith(all[key], '[') && _.endsWith(all[key], ']')) {
-            const list = all[key].substring(1, all[key].length - 1);
-            all[key] = list.split(',');
-          }
+          all[key] = this._boolify(all[key]);
+          all[key] =this._queryParamToArray(all[key]);
         });
         this._queryParamsCache = all;
       }
@@ -65,39 +80,42 @@ export function queryParamSupport(target) {
     }
 
     /**
-     * Get one query param value. Recalculates every time it's called.
-     * @param name - The query param name
-     * @param props - Optional. An alternate props object to use instead of the current props
+     * Get one query param value.
+     * @param {string} name - The query param name
+     * @param {object} props - Optional. An alternate props object to use instead of the current props
      */
-    getQueryParam(name, props) {
-      props = props || this.props;
+    getQueryParam(name, props = this.props) {
       const defaults = this.defaultQueryParams || {};
-      // If query param is not defined on the query get it's default
-      const result = typeof props.location.query[name] !== 'undefined' ? props.location.query[name] : defaults[name];
-      return this.boolify(result);
+      let result = typeof props.location.query[name] !== 'undefined' ? props.location.query[name] : defaults[name];
+      result = this._boolify(result);
+      result = this._queryParamToArray(result);
+      return result;
     };
 
     /**
-     * Set query param values. Merges the changes in to the current values, similar to setState().
+     * Set query param values. Merges changes into the current values, similar to setState().
      * Removes params that match the default.
-     * @param params - Object of name:values to overlay on current query param values.
-     * @param addHistory - true = add browser history, default false.
+     * @param {object} params - Object of name:values to overlay on current query param values.
+     * @param {boolean} addHistory - true = add browser history, default false.
      */
-    setQueryParams(params, addHistory) {
+    setQueryParams(params, addHistory = false) {
       const nextQueryParams = { ...this.props.location.query, ...params };
       const defaults = this.defaultQueryParams || {};
 
       Object.keys(nextQueryParams).forEach(key => {
-        // Convert arrays to strings
+        // Array to string
         if (Array.isArray(nextQueryParams[key])) {
-          // set query param array
-          nextQueryParams[key] = '[' + nextQueryParams[key].toString() + ']';
+          nextQueryParams[key] = JSON.stringify(nextQueryParams[key]);
         }
         // Remove params that match the default
         if (nextQueryParams[key] === defaults[key]) {
           delete nextQueryParams[key];
         }
       });
+
+      if (!this.context || !this.context.router) {
+        throw new Error('QueryParamSupport -- missing context.router. You should have static contextTypes={router: routeShape} defined in your class.');
+      }
 
       if (addHistory) {
         this.context.router.push({ pathname: window.location.pathname, query: nextQueryParams });

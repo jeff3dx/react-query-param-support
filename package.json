@@ -1,14 +1,15 @@
 {
   "name": "react-query-param-support",
   "description": "Decorator that adds query param support to a React route handler class",
-  "version": "1.0.6",
+  "version": "1.0.11",
   "author": "Jeff Butsch <jbutsch@netflix.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jeff3dx/query-param-support.git"
+    "url": "git+https://github.com/jeff3dx/query-param-support.git"
   },
   "dependencies": {
-    "lodash": "^4.16.6"
+    "string.prototype.endswith": "^0.2.0",
+    "string.prototype.startswith": "^0.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -16,8 +17,12 @@
     "babel-preset-stage-0": "^6.16.0"
   },
   "main": "lib/react-query-param-support.js",
-  "license": "",
+  "license": "ISC",
   "scripts": {
     "build": "babel --presets es2015,stage-0 -d lib/ src/"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/jeff3dx/query-param-support/issues"
+  },
+  "homepage": "https://github.com/jeff3dx/query-param-support#readme"
 }
