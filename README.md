@@ -4,7 +4,7 @@ JavaScript [decorator](https://medium.com/google-developers/exploring-es7-decora
 Report issues [here](https://github.com/jeff3dx/query-param-support/issues).
 
 ####Requirements
-Designed to work with React Router and a **route handler** class. A route handler is a class directly referenced by a your Router, and therefore receives *props.location.query*.
+Designed to work with React Router and a **route handler** class. A route handler is a class directly referenced by your Router, and therefore receives *props.location.query*.
 
 ##Installation
 ####github users
@@ -86,10 +86,10 @@ To clear an array set the value to an empty array. (Don't set it to null or empt
 
 	this.setQueryParams({ food: [] });
 
-You can set default values to arrays or array literals.
+You can set a default value to a stringified array (JSON format).
 
 	defaultQueryParams = {
-		lunch: ['bacon', 'nutella']
+		lunch: '["bacon","nutella"]'
 	}
 
 
