@@ -10,7 +10,7 @@ Designed to work with React Router and a **route handler** class. A route handle
 ####github users
 Run the install command:
 
-	npm install https://github.com/jeff3dx/query-param-support.git --save
+	npm install https://github.com/jeff3dx/react-query-param-support.git --save
 
 ####Netflix corporate users
 You should use the Netflix private NPM registry. Contact [Jeff Butsch](mailto:jbutsch@netflix.com) for instructions. 
