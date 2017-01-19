@@ -1,8 +1,6 @@
 #React Query Param Support
 JavaScript [decorator](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.e3bcycini) that adds query param support to a React component.
 
-Report issues [here](https://github.com/jeff3dx/query-param-support/issues).
-
 ####Requirements
 Designed to work with React Router and a **route handler** class. A route handler is a class directly referenced by your Router, and therefore receives *props.location.query*.
 
@@ -51,7 +49,7 @@ Then run the install command:
 
 ###5. Optional - Define defaultQueryParams
 
-defaultQueryParams allows your app to have default values when there are no query params included in the URL. If a query param is not included in the URL it's default will be used. Likewise if you set a query param to it's default value it will be removed from the URL and it's default value will be used. If you define defaults for all your query params your app will start with a clean URL uncluttered by query params.  
+defaultQueryParams allows your app to have default values when there are no query params included in the URL. If a query param is not included in the URL it's default will be used. Likewise if you set a query param to it's default value it will be removed from the URL and it's default value will be used. If you define defaults for all your query params your app can start with a clean URL uncluttered by query params.  
 
 	import { queryParamSupport } from 'react-query-param-support';
 	import { routerShape } from 'react-router';
@@ -74,6 +72,9 @@ defaultQueryParams allows your app to have default values when there are no quer
 * If a query param is not included in the URL and it does not have a default value defined, **undefined** will be returned.
 * If you set a query param to it's default value, it will be **removed from the URL** and it's default value will be returned.
 	
+##Important Tip
+If you put a value in a query param do not put it in state. The query param should own the value and be the source of truth for the value. Query params are derived from props but behave like state and should not be added to state.
+
 ##Arrays
 
 You can set a query param value to an array. Arrays will be serialized to a query param string when set, and deserialized back to an array when read.
